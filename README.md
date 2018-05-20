@@ -4,7 +4,9 @@
 
 # Далее:
   - Описание функций, имеющихся в API RGC ([API.md])
-  - Текущие задания (список TODO) ([TODO.md])
+  - Текущие задания (список TODO) ([TODO.md] или [Issues])
+  
   
    [API.md]: <https://github.com/vuvk/rgc_interpreter/blob/master/API.md>
    [TODO.md]: <https://github.com/vuvk/rgc_interpreter/blob/master/TODO.md>
+   [Issues]: <https://github.com/vuvk/rgc_interpreter/issues>
