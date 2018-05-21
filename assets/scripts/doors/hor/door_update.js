@@ -61,11 +61,12 @@ if (!isMoving) {
 }
 
 if (isMoving) {
+	var moveStep = openSpeed * deltaTime();
 	if (!isOpened) {		
 		var distToEnd = (pos.sub(end)).length();
 		if (distToEnd > 0.01) {
 			var dirVector = (end.sub(start)).normalize();
-			dirVector = dirVector.mul(openSpeed * deltaTime());
+			dirVector = dirVector.mul(moveStep);
 			
 			pos.x += dirVector.x;
 			pos.y += dirVector.y;
@@ -84,7 +85,7 @@ if (isMoving) {
 		var distToStart = (pos.sub(start)).length();
 		if (distToStart > 0.01) {
 			var dirVector = (start.sub(end)).normalize();
-			dirVector = dirVector.mul(openSpeed * deltaTime());
+			dirVector = dirVector.mul(moveStep);
 			
 			pos.x += dirVector.x;
 			pos.y += dirVector.y;
