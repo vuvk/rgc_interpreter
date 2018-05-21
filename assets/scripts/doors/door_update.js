@@ -15,6 +15,11 @@ end.x = objectGetVar(doorId, "endX");
 end.y = objectGetVar(doorId, "endY");
 end.z = objectGetVar(doorId, "endZ");
 
+var moveVector = new Vector3f();
+moveVector.x = objectGetVar(doorId, "dirX");
+moveVector.y = objectGetVar(doorId, "dirY");
+moveVector.z = objectGetVar(doorId, "dirZ");
+
 var distToPlayer;
 var stayOpened = objectGetVar(doorId, "stayOpened");
 var openSpeed  = objectGetVar(doorId, "openSpeed" );
@@ -35,6 +40,12 @@ if (!isMoving) {
 				if (!needKey) {
 					isMoving = true;
 					print("NOW OPENNING!");
+					
+					/* calculate new move direction */
+					moveVector = (end.sub(start)).normalize();
+					objectSetVar(doorId, "dirX", moveVector.x);
+					objectSetVar(doorId, "dirY", moveVector.y);
+					objectSetVar(doorId, "dirZ", moveVector.z);
 				}
 				else {
 					var message = objectGetVar(doorId, "message");
@@ -49,9 +60,14 @@ if (!isMoving) {
 					_delay += deltaTime();
 				else {
 					isMoving = true;
-					_delay = 0;
-					
+					_delay = 0;					
 					print("NOW CLOSING!");
+					
+					/* calculate new move direction */
+					moveVector = (start.sub(end)).normalize();
+					objectSetVar(doorId, "dirX", moveVector.x);
+					objectSetVar(doorId, "dirY", moveVector.y);
+					objectSetVar(doorId, "dirZ", moveVector.z);
 				}
 			}
 			else
@@ -63,15 +79,13 @@ if (!isMoving) {
 if (isMoving) {
 	var moveStep = openSpeed * deltaTime();
 	if (!isOpened) {		
-		//var distToEnd = distanceBetweenPoints(pos.x, pos.y, pos.z, end.x, end.y, end.z);
 		var distToEnd = distanceBetweenVectors(pos, end);
 		if (distToEnd > moveStep) {
-			var dirVector = (end.sub(start)).normalize();
-			dirVector = dirVector.mul(moveStep);
+			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dirVector.x;
-			pos.y += dirVector.y;
-			pos.z += dirVector.z;
+			pos.x += dir.x;
+			pos.y += dir.y;
+			pos.z += dir.z;
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
@@ -83,15 +97,13 @@ if (isMoving) {
 		}
 	}
 	else {
-		//var distToStart = distanceBetweenPoints(pos.x, pos.y, pos.z, start.x, start.y, start.z);
 		var distToStart = distanceBetweenVectors(pos, start);
 		if (distToStart > moveStep) {
-			var dirVector = (start.sub(end)).normalize();
-			dirVector = dirVector.mul(moveStep);
+			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dirVector.x;
-			pos.y += dirVector.y;
-			pos.z += dirVector.z;
+			pos.x += dir.x;
+			pos.y += dir.y;
+			pos.z += dir.z;
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
@@ -112,6 +124,7 @@ delete doorId,
 		pos,
 		start,
 		end,
+		moveVector,
 		distToPlayer,
 		stayOpened,
 		openSpeed,
