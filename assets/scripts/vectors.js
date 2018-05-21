@@ -94,3 +94,12 @@ function Vector3f(x, y, z) {
 	}
 }
 
+function distanceBetweenVectors(vec1, vec2) {
+	if ((vec1 instanceof(Vector2f)) && (vec2 instanceof(Vector2f)))
+		return distanceBetweenPoints(vec1.x, vec1.y, vec2.x, vec2.y);
+	else
+		if ((vec1 instanceof(Vector3f)) && (vec2 instanceof(Vector3f)))
+			return distanceBetweenPoints(vec1.x, vec1.y, vec1.z, vec2.x, vec2.y, vec2.z);
+		else
+			return Number.MAX_VALUE;
+}

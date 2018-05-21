@@ -27,8 +27,7 @@ var _delay = objectGetVar(doorId, "_delay");
 
 
 if (!isMoving) {
-	//distToPlayer = (start.sub(g_PlayerPos)).length();
-	distToPlayer = distanceBetweenPoints2d(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
+	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
 	
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
@@ -64,8 +63,8 @@ if (!isMoving) {
 if (isMoving) {
 	var moveStep = openSpeed * deltaTime();
 	if (!isOpened) {		
-		//var distToEnd = (pos.sub(end)).length();
-		var distToEnd = distanceBetweenPoints3d(pos.x, pos.y, pos.z, end.x, end.y, end.z);
+		//var distToEnd = distanceBetweenPoints(pos.x, pos.y, pos.z, end.x, end.y, end.z);
+		var distToEnd = distanceBetweenVectors(pos, end);
 		if (distToEnd > moveStep) {
 			var dirVector = (end.sub(start)).normalize();
 			dirVector = dirVector.mul(moveStep);
@@ -84,8 +83,8 @@ if (isMoving) {
 		}
 	}
 	else {
-		//var distToStart = (pos.sub(start)).length();
-		var distToStart = distanceBetweenPoints3d(pos.x, pos.y, pos.z, start.x, start.y, start.z);
+		//var distToStart = distanceBetweenPoints(pos.x, pos.y, pos.z, start.x, start.y, start.z);
+		var distToStart = distanceBetweenVectors(pos, start);
 		if (distToStart > moveStep) {
 			var dirVector = (start.sub(end)).normalize();
 			dirVector = dirVector.mul(moveStep);

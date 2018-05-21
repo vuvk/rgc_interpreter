@@ -93,8 +93,7 @@ MAP_HEIGHT = 64
 |degToRad|double|double|Преобразование градусов в радианы|
 |radToDeg|double|double|Преобразование радиан в градусы|
 |distanceBetweenObjects| uint uint |double|Возвращает расстояние между двумя объектами, принимает в параметрах идентификаторы объектов для проверки|
-|distanceBetweenPoints2d|double double double double|double|Возвращает расстояние между двумя двухмерными точками|
-|distanceBetweenPoints3d|double double double double double double|double|Возвращает расстояние между двумя трехмерными точками|
+|distanceBetweenPoints|(*)|double|Возвращает расстояние между двумя точками. Функция полиморфна. Принимает: для двумерных точек 4 параметра типа double - x1 y1 x2 y2; для трёхмерных точек 6 параметров типа double - x1 y1 z1 x2 y2 z2|
 
 # Системные
 | Имя функции | Входные параметры | Результат | Описание |
