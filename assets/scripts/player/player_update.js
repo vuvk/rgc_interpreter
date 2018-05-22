@@ -1,6 +1,4 @@
-g_PlayerPos.x = playerGetPositionX();
-g_PlayerPos.y = playerGetPositionY();
-g_PlayerPos.z = playerGetPositionZ();
+g_PlayerPos = new Vector3f(playerGetPosition());
 
 var pitch = cameraGetPitch();
 var yaw   = cameraGetYaw();

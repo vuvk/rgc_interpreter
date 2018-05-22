@@ -13,6 +13,9 @@ function cameraSetPosition(x, y, z) {
 }
 
 /* getters */
+function cameraGetPosition() {
+	return objectGetPosition(g_CameraId);
+}
 function cameraGetPositionX() {
 	return objectGetPositionX(g_CameraId);
 }

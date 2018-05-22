@@ -1,8 +1,22 @@
-
 function Vector2f(x, y) {
-	this.x = x;
-	this.y = y;
+	this.x = 0;
+	this.y = 0;
 	
+	switch (arguments.length)
+	{
+		case 1 : 			// create from array
+			if (x.length >= 2) {
+				this.x = x[0];
+				this.y = x[1];
+			}
+			break;
+			
+		case 2 : 			// create from coords
+			this.x = x;
+			this.y = y;
+			break;
+	}
+		
 	this.add = function(vec2) {
 		return new Vector2f(this.x + vec2.x, 
 		                    this.y + vec2.y);
@@ -40,10 +54,29 @@ function Vector2f(x, y) {
 	}
 }
 
+
 function Vector3f(x, y, z) {
-	this.x = x;
-	this.y = y;
-	this.z = z;
+	this.x = 0;
+	this.y = 0;
+	this.z = 0;
+	
+	switch (arguments.length)
+	{
+		case 1 : 			// create from array
+			if (x.length >= 3) {
+				this.x = x[0];
+				this.y = x[1];
+				this.z = x[2];
+			}
+			break;
+			
+		case 3 : 
+			this.z = z;
+		case 2 : 			// create from coords
+			this.x = x;
+			this.y = y;
+			break;
+	}
 	
 	this.add = function(vec3) {
 		return new Vector3f(this.x + vec3.x, 
@@ -93,6 +126,7 @@ function Vector3f(x, y, z) {
 				    this.x * vec3.y - this.y * vec3.x);
 	}
 }
+
 
 function distanceBetweenVectors(vec1, vec2) {
 	if ((vec1 instanceof(Vector2f)) && (vec2 instanceof(Vector2f)))

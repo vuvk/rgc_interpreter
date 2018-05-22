@@ -17,6 +17,9 @@ function playerSetHealth(hp) {
 }
 
 /* getters */
+function playerGetPosition() {
+	return objectGetPosition(g_PlayerId);
+}
 function playerGetPositionX() {
 	return objectGetPositionX(g_PlayerId);
 }
