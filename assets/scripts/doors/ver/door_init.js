@@ -1,28 +1,20 @@
 var doorId = objectGetId();
 
 /* get start position */
-var pos = new Vector3f();
-pos.x = objectGetPositionX(doorId);
-pos.y = objectGetPositionY(doorId);
-pos.z = objectGetPositionZ(doorId);
+var pos = new Vector3f(objectGetPosition(doorId));
 
 /* save start position */
-objectAddVarNumber(doorId, "startX", pos.x);
-objectAddVarNumber(doorId, "startY", pos.y);
-objectAddVarNumber(doorId, "startZ", pos.z);
+objectAddVarVector(doorId, "start", pos.x, pos.y, pos.z);
 
 objectAddVarBool(doorId, "isOpened", false);
 objectAddVarBool(doorId, "isMoving", false);
 
 /* save position for open state */
-objectAddVarNumber(doorId, "endX", pos.x);
-objectAddVarNumber(doorId, "endY", pos.y - 0.95);
-objectAddVarNumber(doorId, "endZ", pos.z);
+objectAddVarVector(doorId, "end", pos.x, pos.y - 0.95, pos.z);// move down
+//objectAddVarVector(doorId, "end", pos.x, pos.y + 0.95, pos.z);// move up
 
 /* move direction */
-objectAddVarNumber(doorId, "dirX", 0.0);
-objectAddVarNumber(doorId, "dirY", 0.0);
-objectAddVarNumber(doorId, "dirZ", 0.0);
+objectAddVarVector(doorId, "dir", 0.0, 0.0, 0.0);
 
 /* time of stay on opened position */
 objectAddVarNumber(doorId, "delay", 1);

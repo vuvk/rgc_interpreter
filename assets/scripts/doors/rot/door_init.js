@@ -1,15 +1,10 @@
 var doorId = objectGetId();
 
-var pos = new Vector3f();
 /* get start position */
-pos.x = objectGetPositionX(doorId);
-pos.y = objectGetPositionY(doorId);
-pos.z = objectGetPositionZ(doorId);
+var pos = new Vector3f(objectGetPosition(doorId));
 
 /* save start position */
-objectAddVarNumber(doorId, "startX", pos.x);
-objectAddVarNumber(doorId, "startY", pos.y);
-objectAddVarNumber(doorId, "startZ", pos.z);
+objectAddVarVector(doorId, "start", pos.x, pos.y, pos.z);
 
 /* save start angle */
 objectAddVarNumber(doorId, "angle", 0.0);

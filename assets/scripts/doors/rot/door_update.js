@@ -1,9 +1,6 @@
 var doorId = objectGetId();
 
-var start = new Vector3f();
-start.x = objectGetVar(doorId, "startX");
-start.y = objectGetVar(doorId, "startY");
-start.z = objectGetVar(doorId, "startZ");
+var start = new Vector3f(objectGetVar(doorId, "start"));
 
 var distToPlayer;
 var stayOpened = objectGetVar(doorId, "stayOpened");
