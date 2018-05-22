@@ -16,7 +16,7 @@ var _delay = objectGetVar(doorId, "_delay");
 
 
 if (!isMoving) {
-	distToPlayer = (start.sub(g_PlayerPos)).length();
+	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
 	
 	if (!isOpened) {	
 		if (distToPlayer <= 2.0 && objectIsInView(doorId))
