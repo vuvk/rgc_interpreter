@@ -64,9 +64,7 @@ if (isMoving) {
 		if (distToEnd > moveStep) {
 			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dir.x;
-			pos.y += dir.y;
-			pos.z += dir.z;
+			pos = pos.add(dir);
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
@@ -82,9 +80,7 @@ if (isMoving) {
 		if (distToStart > moveStep) {
 			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dir.x;
-			pos.y += dir.y;
-			pos.z += dir.z;
+			pos = pos.add(dir);
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}

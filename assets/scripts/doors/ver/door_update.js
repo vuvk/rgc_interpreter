@@ -1,24 +1,9 @@
 var doorId = objectGetId();
 
-var pos = new Vector3f();
-pos.x = objectGetPositionX(doorId);
-pos.y = objectGetPositionY(doorId);
-pos.z = objectGetPositionZ(doorId);
-
-var start = new Vector3f();
-start.x = objectGetVar(doorId, "startX");
-start.y = objectGetVar(doorId, "startY");
-start.z = objectGetVar(doorId, "startZ");
-		
-var end = new Vector3f();
-end.x = objectGetVar(doorId, "endX");
-end.y = objectGetVar(doorId, "endY");
-end.z = objectGetVar(doorId, "endZ");
-
-var moveVector = new Vector3f();
-moveVector.x = objectGetVar(doorId, "dirX");
-moveVector.y = objectGetVar(doorId, "dirY");
-moveVector.z = objectGetVar(doorId, "dirZ");
+var pos   = new Vector3f(objectGetPosition(doorId));
+var start = new Vector3f(objectGetVar(doorId, "start"));
+var end   = new Vector3f(objectGetVar(doorId, "end"));
+var moveVector = new Vector3f(objectGetVar(doorId, "dir"));
 
 var distToPlayer;
 var stayOpened = objectGetVar(doorId, "stayOpened");
@@ -32,7 +17,7 @@ var _delay = objectGetVar(doorId, "_delay");
 
 
 if (!isMoving) {
-	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
+	distToPlayer = distanceBetweenVectors(start, g_PlayerPos);
 	
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
@@ -43,9 +28,7 @@ if (!isMoving) {
 					
 					/* calculate new move direction */
 					moveVector = (end.sub(start)).normalize();
-					objectSetVar(doorId, "dirX", moveVector.x);
-					objectSetVar(doorId, "dirY", moveVector.y);
-					objectSetVar(doorId, "dirZ", moveVector.z);
+					objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);
 				}
 				else {
 					var message = objectGetVar(doorId, "message");
@@ -65,9 +48,7 @@ if (!isMoving) {
 					
 					/* calculate new move direction */
 					moveVector = (start.sub(end)).normalize();
-					objectSetVar(doorId, "dirX", moveVector.x);
-					objectSetVar(doorId, "dirY", moveVector.y);
-					objectSetVar(doorId, "dirZ", moveVector.z);
+					objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);
 				}
 			}
 			else
@@ -83,9 +64,7 @@ if (isMoving) {
 		if (distToEnd > moveStep) {
 			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dir.x;
-			pos.y += dir.y;
-			pos.z += dir.z;
+			pos = pos.add(dir);
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
@@ -101,9 +80,7 @@ if (isMoving) {
 		if (distToStart > moveStep) {
 			var dir = moveVector.mul(moveStep);
 			
-			pos.x += dir.x;
-			pos.y += dir.y;
-			pos.z += dir.z;
+			pos = pos.add(dir);
 			
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
