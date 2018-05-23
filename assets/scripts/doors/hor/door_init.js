@@ -13,13 +13,19 @@ var isHorizontal = ((mapIsPlaceFree(pos.x, -pos.z - 1)) && (mapIsPlaceFree(pos.x
 objectAddVarBool(doorId, "isOpened", false);
 objectAddVarBool(doorId, "isMoving", false);
 
+var openSpeed = objectGetVar(doorId, "openSpeed");
+print("openSpeed = " + openSpeed);
+
+var moveTo = 0.95;
+if(openSpeed < 0) moveTo = -moveTo;
+
 /* save direction for openning */
 if (isHorizontal) {
-	objectAddVarVector(doorId, "end", pos.x - 0.95, pos.y, pos.z);
+	objectAddVarVector(doorId, "end", pos.x - moveTo, pos.y, pos.z);
 }
 else
 	if (isVertical) {
-		objectAddVarVector(doorId, "end", pos.x, pos.y, pos.z + 0.95);
+		objectAddVarVector(doorId, "end", pos.x, pos.y, pos.z + moveTo);
 	}
 
 /* move direction */
@@ -28,6 +34,8 @@ objectAddVarVector(doorId, "dir", 0.0, 0.0, 0.0);
 /* time of stay on opened position */
 objectAddVarNumber(doorId, "delay", 1);
 objectAddVarNumber(doorId, "_delay", 0);
+
+
 
 delete doorId, 
 		pos,
