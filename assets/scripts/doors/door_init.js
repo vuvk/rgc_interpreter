@@ -29,6 +29,9 @@ objectAddVarVector(doorId, "dir", 0.0, 0.0, 0.0);
 objectAddVarNumber(doorId, "delay", 1);
 objectAddVarNumber(doorId, "_delay", 0);
 
+var openSpeed = objectGetVar(doorId, "openSpeed");
+print("openSpeed = " + openSpeed);
+
 delete doorId, 
 		pos,
 		isHorizontal,
