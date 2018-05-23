@@ -19,7 +19,7 @@ if (!isMoving) {
 	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
 	
 	if (!isOpened) {	
-		if (distToPlayer <= 2.0 && objectIsInView(doorId))
+		if (distToPlayer <= 1.0 && objectIsInView(doorId))
 			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
 				if (!needKey) {
 					isMoving = true;

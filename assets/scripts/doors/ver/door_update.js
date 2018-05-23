@@ -38,7 +38,7 @@ if (!isMoving) {
 	}
 	else {	// is opened
 		if (!stayOpened) {
-			if (distToPlayer > 1.0) {   // wait when player is far
+			if (distToPlayer > 2.0) {   // wait when player is far
 				if (_delay < delay)
 					_delay += deltaTime();
 				else {
