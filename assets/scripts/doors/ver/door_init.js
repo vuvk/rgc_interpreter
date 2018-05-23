@@ -9,9 +9,12 @@ objectAddVarVector(doorId, "start", pos.x, pos.y, pos.z);
 objectAddVarBool(doorId, "isOpened", false);
 objectAddVarBool(doorId, "isMoving", false);
 
+var openSpeed = objectGetVar(doorId, "openSpeed");
+var moveTo = 0.95;
+if(openSpeed < 0) moveTo = -moveTo;
+
 /* save position for open state */
-objectAddVarVector(doorId, "end", pos.x, pos.y - 0.95, pos.z);// move down
-//objectAddVarVector(doorId, "end", pos.x, pos.y + 0.95, pos.z);// move up
+objectAddVarVector(doorId, "end", pos.x, pos.y - moveTo, pos.z);
 
 /* move direction */
 objectAddVarVector(doorId, "dir", 0.0, 0.0, 0.0);
