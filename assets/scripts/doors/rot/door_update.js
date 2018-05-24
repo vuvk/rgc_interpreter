@@ -14,6 +14,8 @@ var angle = objectGetVar(doorId, "angle");
 var delay  = objectGetVar(doorId, "delay");
 var _delay = objectGetVar(doorId, "_delay");
 
+var pos   = new Vector3f(objectGetPosition(doorId));
+var defAngle = objectGetVar(doorId, "defAngle");
 
 if (!isMoving) {
 	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
@@ -21,6 +23,11 @@ if (!isMoving) {
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
 			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
+				var radian = Math.atan2(g_PlayerPos.x - pos.x, g_PlayerPos.z - pos.z) ;				
+				openSpeed = Math.abs(openSpeed);				
+				if( (defAngle == 90 && radian < 1) || (defAngle == 0 && radian > 1) )
+					openSpeed = -openSpeed;					
+				objectSetVar(doorId, "openSpeed", openSpeed);
 				if (!needKey) {
 					isMoving = true;
 					print("NOW OPENNING!");
@@ -50,10 +57,10 @@ if (!isMoving) {
 }
 
 if (isMoving) {
-	if (!isOpened) {
+	if (!isOpened) {		
 		if (angle < 89.0) {
 			var rotSpeed = 50 * openSpeed * deltaTime();
-			angle += rotSpeed;
+			angle += Math.abs(rotSpeed);
 			objectRotate(doorId, 0.0, rotSpeed, 0.0);
 		}
 		else {
@@ -64,7 +71,7 @@ if (isMoving) {
 	else {
 		if (angle > 0.01) {
 			var rotSpeed = 50 * openSpeed * deltaTime();
-			angle -= rotSpeed;
+			angle -=  Math.abs(rotSpeed);
 			objectRotate(doorId, 0.0, -rotSpeed, 0.0);
 		}
 		else {
@@ -87,4 +94,6 @@ delete doorId,
 		isOpened,
 		isMoving,
 		delay,
-		_delay;
+		_delay,
+		pos,
+		defAngle;

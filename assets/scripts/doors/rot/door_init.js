@@ -3,6 +3,14 @@ var doorId = objectGetId();
 /* get start position */
 var pos = new Vector3f(objectGetPosition(doorId));
 
+/* check direction */
+var isVertical   = ((mapIsPlaceFree(pos.x - 1, -pos.z)) && (mapIsPlaceFree(pos.x + 1, -pos.z)));
+
+var defAngle = 0;
+if(isVertical)
+	defAngle = 90;
+objectAddVarNumber(doorId, "defAngle", defAngle);
+
 /* save start position */
 objectAddVarVector(doorId, "start", pos.x, pos.y, pos.z);
 
@@ -16,5 +24,6 @@ objectAddVarNumber(doorId, "delay", 1);
 objectAddVarNumber(doorId, "_delay", 0);
 
 delete doorId, 
-		pos;
+		pos,
+		defAngle;
 		
