@@ -44,6 +44,11 @@ if (Keyboard.isEventAvailable()) {
 		g_PlayerPos.z += dZ;
 	}
 	
+	if (Keyboard.isKeyReleased(VK_KEY_C)) { //pause
+		var vec = new Vector3f(cameraGetTarget());
+		print("vec = [" + vec.x + " " + vec.y + " " + vec.z + "]");
+	}
+	
 	if (Keyboard.isKeyReleased(VK_KEY_P)) { //pause
 		g_PauseState = !g_PauseState;
 		print("g_PauseState = " + g_PauseState);
