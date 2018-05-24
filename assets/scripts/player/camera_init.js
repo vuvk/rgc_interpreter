@@ -5,6 +5,9 @@ var g_RotSpeed  = 0.5;
 
 print("camera id is " + g_CameraId);
 
+/* set unvisible cursor */
+Mouse.setCursorVisible(false);
+
 /* WRAPPERS */
 
 /* setters */

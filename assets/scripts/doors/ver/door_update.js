@@ -63,10 +63,10 @@ if (isMoving) {
 		var distToEnd = distanceBetweenVectors(pos, end);
 		if (distToEnd > Math.abs(moveStep)) {
 			var dir = moveVector.mul(moveStep);
-			if(openSpeed > 0)
-			 pos = pos.add(dir);
+			if (openSpeed > 0)
+				pos = pos.add(dir);
 			else
-			 pos = pos.sub(dir);
+				pos = pos.sub(dir);
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
 		else {
@@ -80,10 +80,10 @@ if (isMoving) {
 		var distToStart = distanceBetweenVectors(pos, start);
 		if (distToStart > Math.abs(moveStep)) {
 			var dir = moveVector.mul(moveStep);
-			if(openSpeed > 0)
-			 pos = pos.add(dir);
+			if (openSpeed > 0)
+				pos = pos.add(dir);
 			else
-			 pos = pos.sub(dir);
+				pos = pos.sub(dir);
 			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
 		else {

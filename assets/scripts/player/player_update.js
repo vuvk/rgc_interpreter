@@ -44,9 +44,16 @@ if (Keyboard.isEventAvailable()) {
 		g_PlayerPos.z += dZ;
 	}
 	
-	//print('player pos = [' + g_PlayerPos.x + ' ' + g_PlayerPos.y + ' ' + g_PlayerPos.z + ']');
-	playerSetPosition(g_PlayerPos.x, g_PlayerPos.y, g_PlayerPos.z);
-	cameraUpdate();
+	if (Keyboard.isKeyReleased(VK_KEY_P)) { //pause
+		g_PauseState = !g_PauseState;
+		print("g_PauseState = " + g_PauseState);
+		Mouse.setCursorVisible(g_PauseState);
+	}
+	
+	if (!g_PauseState) {
+		playerSetPosition(g_PlayerPos.x, g_PlayerPos.y, g_PlayerPos.z);
+		cameraUpdate();
+	}
 }
 
 delete moveSpeed;

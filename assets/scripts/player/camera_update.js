@@ -20,11 +20,13 @@ if (Mouse.isEventAvailable()) {
 	if ((pitch > 45.0 ) && (pitch < 180.0)) pitch = 45.0;
 	if ((pitch < 315.0) && (pitch > 180.0)) pitch = 315.0;
 	
-	Mouse.setPosition(halfWidth, halfHeight);
+	if (!g_PauseState) {
+		Mouse.setPosition(halfWidth, halfHeight);
 
-	cameraSetPitch(pitch);
-	cameraSetYaw  (yaw);
-	cameraUpdate();
+		cameraSetPitch(pitch);
+		cameraSetYaw  (yaw);
+		cameraUpdate();
+	}
 	
 	delete dX, dY, dZ;
 	delete yaw, pitch;
