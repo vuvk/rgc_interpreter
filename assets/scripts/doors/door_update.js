@@ -30,7 +30,7 @@ if (!isMoving) {
 					var keyExists = objectGetVar(g_PlayerId, keyName);
 					
 					if (keyExists == true) {	
-						startOpenDoor();				
+						startOpenDoor();
 					}
 					else {
 						var message = objectGetVar(doorId, "message");
