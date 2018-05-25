@@ -15,33 +15,27 @@ var delay  = objectGetVar(doorId, "delay");
 var _delay = objectGetVar(doorId, "_delay");
 
 var pos   = new Vector3f(objectGetPosition(doorId));
-var defAngle = objectGetVar(doorId, "defAngle");
-
-function setDoorOpeningDirection() {
-	var radian = Math.atan2(g_PlayerPos.x - pos.x, g_PlayerPos.z - pos.z) ;				
-	openSpeed = Math.abs(openSpeed);				
-	if( (defAngle == 90 && radian < 1) || (defAngle == 0 && radian > 1) )
-		openSpeed = -openSpeed;					
-	objectSetVar(doorId, "openSpeed", openSpeed);
-}
 
 if (!isMoving) {
 	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
 	
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
-			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {				
+			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
 				if (!needKey) {
-					setDoorOpeningDirection();
-					isMoving = true;
-					print("NOW OPENNING!");
+					startOpenDoor();
 				}
 				else {
-					var message = objectGetVar(doorId, "message");
-					print("Message: '" + message + "'");
-					//if player have door key use this code
-					// objectSetVar(doorId, "needKey", false);
-					// and door opening after the second click					
+					var keyName = objectGetVar(doorId, "keyName");
+					var keyExists = objectGetVar(g_PlayerId, keyName);
+					
+					if (keyExists == true) {	
+						startOpenDoor();				
+					}
+					else {
+						var message = objectGetVar(doorId, "message");
+						print("Message: '" + message + "'");
+					}
 				}
 			}
 	}
@@ -102,5 +96,4 @@ delete doorId,
 		isMoving,
 		delay,
 		_delay,
-		pos,
-		defAngle;
+		pos;

@@ -24,7 +24,7 @@ if (!isMoving) {
 			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
 				if (!needKey) {
 					isMoving = true;
-					print("NOW OPENNING!");
+					print("NOW OPENING!");
 					
 					/* calculate new move direction */
 					moveVector = (end.sub(start)).normalize();

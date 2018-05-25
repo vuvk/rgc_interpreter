@@ -17,7 +17,8 @@ var openSpeed = objectGetVar(doorId, "openSpeed");
 print("openSpeed = " + openSpeed);
 
 var moveTo = 0.95;
-if(openSpeed < 0) moveTo = -moveTo;
+if (openSpeed < 0) 
+	moveTo = -moveTo;
 
 /* save direction for openning */
 if (isHorizontal) {

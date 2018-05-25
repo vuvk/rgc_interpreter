@@ -11,7 +11,8 @@ objectAddVarBool(doorId, "isMoving", false);
 
 var openSpeed = objectGetVar(doorId, "openSpeed");
 var moveTo = 0.95;
-if(openSpeed < 0) moveTo = -moveTo;
+if (openSpeed < 0) 
+	moveTo = -moveTo;
 
 /* save position for open state */
 objectAddVarVector(doorId, "end", pos.x, pos.y - moveTo, pos.z);
