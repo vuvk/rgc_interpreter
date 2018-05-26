@@ -1,6 +1,9 @@
 var doorId = objectGetId();
 
+var pos   = new Vector3f(objectGetPosition(doorId));
 var start = new Vector3f(objectGetVar(doorId, "start"));
+var end   = new Vector3f(objectGetVar(doorId, "end"));
+var moveVector = new Vector3f(objectGetVar(doorId, "dir"));
 
 var distToPlayer;
 var stayOpened = objectGetVar(doorId, "stayOpened");
@@ -9,12 +12,9 @@ var isOpened   = objectGetVar(doorId, "isOpened"  );
 var isMoving   = objectGetVar(doorId, "isMoving"  );
 var needKey    = objectGetVar(doorId, "needKey"   );
 
-var angle = objectGetVar(doorId, "angle");
-
 var delay  = objectGetVar(doorId, "delay");
 var _delay = objectGetVar(doorId, "_delay");
 
-var pos   = new Vector3f(objectGetPosition(doorId));
 
 if (!isMoving) {
 	distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
@@ -22,7 +22,7 @@ if (!isMoving) {
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
 			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
-				if (!needKey) {
+				if (!needKey) {		
 					startOpenDoor();
 				}
 				else {
@@ -46,9 +46,12 @@ if (!isMoving) {
 					_delay += deltaTime();
 				else {
 					isMoving = true;
-					_delay = 0;
-					
+					_delay = 0;					
 					print("NOW CLOSING!");
+					
+					/* calculate new move direction */
+					moveVector = (start.sub(end)).normalize();
+					objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);	
 				}
 			}
 			else
@@ -58,42 +61,56 @@ if (!isMoving) {
 }
 
 if (isMoving) {
+	var moveStep = openSpeed * deltaTime();
 	if (!isOpened) {		
-		if (angle < 89.0) {
-			var rotSpeed = 50 * openSpeed * deltaTime();
-			angle += Math.abs(rotSpeed);
-			objectRotate(doorId, 0.0, rotSpeed, 0.0);
+		var distToEnd = distanceBetweenVectors(pos, end);
+		if (distToEnd > Math.abs(moveStep)) {
+			var dir = moveVector.mul(moveStep);
+			if (openSpeed > 0)
+				pos = pos.add(dir);
+			else
+				pos = pos.sub(dir);
+			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
 		else {
 			isOpened = true;
 			isMoving = false;
+			
+			objectSetPosition(doorId, end.x, end.y, end.z);
 		}
 	}
 	else {
-		if (angle > 0.01) {
-			var rotSpeed = 50 * openSpeed * deltaTime();
-			angle -=  Math.abs(rotSpeed);
-			objectRotate(doorId, 0.0, -rotSpeed, 0.0);
+		var distToStart = distanceBetweenVectors(pos, start);
+		if (distToStart > Math.abs(moveStep)) {
+			var dir = moveVector.mul(moveStep);
+			if (openSpeed > 0)
+				pos = pos.add(dir);
+			else
+				pos = pos.sub(dir);
+			objectSetPosition(doorId, pos.x, pos.y, pos.z);
 		}
 		else {
 			isOpened = false;
 			isMoving = false;
+			
+			objectSetPosition(doorId, start.x, start.y, start.z);
 		}		
 	}	
 }
 
-objectSetVar(doorId, "angle",    angle);
 objectSetVar(doorId, "isOpened", isOpened);
 objectSetVar(doorId, "isMoving", isMoving);
 objectSetVar(doorId, "_delay",   _delay);
 
 delete doorId,
-		angle,
+		pos,
+		start,
+		end,
+		moveVector,
 		distToPlayer,
 		stayOpened,
 		openSpeed,
 		isOpened,
 		isMoving,
 		delay,
-		_delay,
-		pos;
+		_delay;

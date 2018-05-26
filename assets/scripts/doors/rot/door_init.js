@@ -32,7 +32,7 @@ function setDoorOpeningDirection() {
 	var defAngle = objectGetVar(doorId, "defAngle");
 	var radian = Math.atan2(g_PlayerPos.x - pos.x, g_PlayerPos.z - pos.z);		
 	openSpeed = Math.abs(openSpeed);				
-	if ((defAngle == 90 && radian < 1) || (defAngle == 0 && radian > 1))
+	if ((defAngle == 90 && radian < 1) || (defAngle == 0 && radian > 1.5))
 		openSpeed = -openSpeed;					
 	objectSetVar(doorId, "openSpeed", openSpeed);
 }

@@ -22,17 +22,20 @@ if (!isMoving) {
 	if (!isOpened) {	
 		if (distToPlayer <= 1.0 && objectIsInView(doorId))
 			if (Keyboard.isEventAvailable() && Keyboard.isKeyHit(VK_SPACE)) {
-				if (!needKey) {
-					isMoving = true;
-					print("NOW OPENING!");
-					
-					/* calculate new move direction */
-					moveVector = (end.sub(start)).normalize();
-					objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);					
+				if (!needKey) {		
+					startOpenDoor();
 				}
 				else {
-					var message = objectGetVar(doorId, "message");
-					print("Message: '" + message + "'");
+					var keyName = objectGetVar(doorId, "keyName");
+					var keyExists = objectGetVar(g_PlayerId, keyName);
+					
+					if (keyExists == true) {	
+						startOpenDoor();
+					}
+					else {
+						var message = objectGetVar(doorId, "message");
+						print("Message: '" + message + "'");
+					}
 				}
 			}
 	}
