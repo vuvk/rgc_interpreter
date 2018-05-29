@@ -81,6 +81,11 @@ if (isMoving) {
 		}
 	}
 	else {
+		distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
+		if (distToPlayer <= 2.0) {// open the closing door as the player approaches
+			isOpened = false;
+			startOpenDoor();
+		}
 		var distToStart = distanceBetweenVectors(pos, start);
 		if (distToStart > Math.abs(moveStep)) {
 			var dir = moveVector.mul(moveStep);
