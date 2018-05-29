@@ -66,17 +66,26 @@ if (isMoving) {
 			objectRotate(doorId, 0.0, rotSpeed, 0.0);
 		}
 		else {
+			objectSetVar(doorId, "prevSpeed", openSpeed);
 			isOpened = true;
 			isMoving = false;
 		}
 	}
 	else {
+		distToPlayer = distanceBetweenPoints(start.x, start.z, g_PlayerPos.x, g_PlayerPos.z);
+		if (distToPlayer <= 2.0) {// open the closing door as the player approaches
+			isOpened = false;
+			var prevSpeed = objectGetVar(doorId, "prevSpeed");
+			if(prevSpeed != openSpeed)
+				startOpenDoor();
+		}
 		if (angle > 0.01) {
 			var rotSpeed = 50 * openSpeed * deltaTime();
 			angle -=  Math.abs(rotSpeed);
 			objectRotate(doorId, 0.0, -rotSpeed, 0.0);
 		}
 		else {
+			objectSetVar(doorId, "prevSpeed", 0.0);
 			isOpened = false;
 			isMoving = false;
 		}		

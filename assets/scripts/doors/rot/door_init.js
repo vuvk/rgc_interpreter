@@ -10,6 +10,7 @@ var defAngle = 0;
 if (isVertical)
 	defAngle = 90;
 objectAddVarNumber(doorId, "defAngle", defAngle);
+objectAddVarNumber(doorId, "prevSpeed", 0.0);
 
 /* save start position */
 objectAddVarVector(doorId, "start", pos.x, pos.y, pos.z);
