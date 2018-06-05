@@ -108,6 +108,7 @@ objectSetVar(doorId, "isOpened", isOpened);
 objectSetVar(doorId, "isMoving", isMoving);
 objectSetVar(doorId, "_delay",   _delay);
 
+/*
 delete doorId,
 		pos,
 		start,
@@ -120,4 +121,4 @@ delete doorId,
 		isMoving,
 		delay,
 		_delay;
-		
+*/

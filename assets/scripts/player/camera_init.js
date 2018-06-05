@@ -1,6 +1,6 @@
 /* globals */
 var g_CameraId = objectGetId();
-var g_CameraPos = new Vector3f(0, 0, 0);
+var g_CameraPos = new Vector3f(g_PlayerPos.x, g_PlayerPos.y, g_PlayerPos.z);
 var g_RotSpeed  = 0.5;
 
 print("camera id is " + g_CameraId);

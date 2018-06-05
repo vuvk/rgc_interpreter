@@ -14,19 +14,19 @@ objectAddVarBool(doorId, "isOpened", false);
 objectAddVarBool(doorId, "isMoving", false);
 
 var openSpeed = objectGetVar(doorId, "openSpeed");
-print("openSpeed = " + openSpeed);
 
 var moveTo = 0.95;
 if (openSpeed < 0) 
 	moveTo = -moveTo;
 
 /* save direction for openning */
+objectAddVarVector(doorId, "end", 0, 0, 0);
 if (isHorizontal) {
-	objectAddVarVector(doorId, "end", pos.x - moveTo, pos.y, pos.z);
+	objectSetVar(doorId, "end", pos.x - moveTo, pos.y, pos.z);
 }
 else
 	if (isVertical) {
-		objectAddVarVector(doorId, "end", pos.x, pos.y, pos.z + moveTo);
+		objectSetVar(doorId, "end", pos.x, pos.y, pos.z + moveTo);
 	}
 
 /* move direction */
@@ -44,9 +44,9 @@ function startOpenDoor() {
 	moveVector = (end.sub(start)).normalize();
 	objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);	
 }
-
+/*
 delete doorId, 
 		pos,
 		isHorizontal,
 		isVertical;
-		
+*/

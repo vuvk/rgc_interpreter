@@ -9,4 +9,6 @@ if (distanceBetweenPoints(pos.x, pos.z, g_PlayerPos.x, g_PlayerPos.z) <= 0.2) {
 	objectDestroy(keyId);
 }
 
+/*
 delete keyId, pos;
+*/

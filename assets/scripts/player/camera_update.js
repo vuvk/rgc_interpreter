@@ -27,7 +27,8 @@ if (Mouse.isEventAvailable()) {
 		cameraSetYaw  (yaw);
 		cameraUpdate();
 	}
-	
+/*
 	delete dX, dY, dZ;
 	delete yaw, pitch;
+*/
 }

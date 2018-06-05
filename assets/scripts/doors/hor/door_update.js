@@ -50,7 +50,7 @@ if (!isMoving) {
 					_delay = 0;					
 					print("NOW CLOSING!");
 					
-					/* calculate new move direction */
+					/* calculate new move direction */	
 					moveVector = (start.sub(end)).normalize();
 					objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);	
 				}
@@ -76,7 +76,7 @@ if (isMoving) {
 		else {
 			isOpened = true;
 			isMoving = false;
-			
+				
 			objectSetPosition(doorId, end.x, end.y, end.z);
 		}
 	}
@@ -108,6 +108,7 @@ objectSetVar(doorId, "isOpened", isOpened);
 objectSetVar(doorId, "isMoving", isMoving);
 objectSetVar(doorId, "_delay",   _delay);
 
+/*
 delete doorId,
 		pos,
 		start,
@@ -120,3 +121,4 @@ delete doorId,
 		isMoving,
 		delay,
 		_delay;
+*/

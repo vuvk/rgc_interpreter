@@ -5,9 +5,7 @@ var yaw   = cameraGetYaw();
 var moveSpeed = g_PlayerSpeed * deltaTime();
 var dX, dY, dZ;
 
-if (Keyboard.isEventAvailable()) {
-	if (Keyboard.isKeyHit(VK_RETURN)) print("HELLO!");
-	
+if (Keyboard.isEventAvailable()) {	
 	if (Keyboard.isKeyPressed(VK_KEY_W)) { // forward
 		var rad = degToRad(yaw);
 		dX = Math.sin(rad) * moveSpeed;
@@ -60,7 +58,8 @@ if (Keyboard.isEventAvailable()) {
 		cameraUpdate();
 	}
 }
-
+/*
 delete moveSpeed;
 delete dX, dY, dZ;
 delete yaw, pitch;
+*/
