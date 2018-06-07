@@ -2,10 +2,10 @@ g_PlayerPos = new Vector3f(playerGetPosition());
 
 var pitch = cameraGetPitch();
 var yaw   = cameraGetYaw();
-var moveSpeed = g_PlayerSpeed * deltaTime();
+var moveSpeed = g_PlayerSpeed * g_DeltaTime;
 var dX, dY, dZ;
 
-if (Keyboard.isEventAvailable()) {	
+if (Keyboard.isEventAvailable() && moveSpeed > 0.0) {	
 	if (Keyboard.isKeyPressed(VK_KEY_W)) { // forward
 		var rad = degToRad(yaw);
 		dX = Math.sin(rad) * moveSpeed;

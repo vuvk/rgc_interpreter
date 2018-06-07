@@ -44,7 +44,7 @@ if (!isMoving) {
 		if (!stayOpened) {
 			if (distToPlayer > 2.0) {   // wait when player is far
 				if (_delay < delay)
-					_delay += deltaTime();
+					_delay += g_DeltaTime;
 				else {
 					isMoving = true;
 					_delay = 0;
@@ -58,10 +58,10 @@ if (!isMoving) {
 	}
 }
 
-if (isMoving) {
+if (isMoving && g_DeltaTime > 0.0) {
 	if (!isOpened) {		
 		if (angle < 89.0) {
-			var rotSpeed = 50 * openSpeed * deltaTime();
+			var rotSpeed = 50 * openSpeed * g_DeltaTime;
 			angle += Math.abs(rotSpeed);
 			objectRotate(doorId, 0.0, rotSpeed, 0.0);
 		}
@@ -80,7 +80,7 @@ if (isMoving) {
 				startOpenDoor();
 		}
 		if (angle > 0.01) {
-			var rotSpeed = 50 * openSpeed * deltaTime();
+			var rotSpeed = 50 * openSpeed * g_DeltaTime;
 			angle -=  Math.abs(rotSpeed);
 			objectRotate(doorId, 0.0, -rotSpeed, 0.0);
 		}

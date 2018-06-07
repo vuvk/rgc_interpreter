@@ -44,7 +44,7 @@ if (!isMoving) {
 		if (!stayOpened) {
 			if (distToPlayer > 2.0) {   // wait when player is far
 				if (_delay < delay)
-					_delay += deltaTime();
+					_delay += g_DeltaTime;
 				else {
 					isMoving = true;
 					_delay = 0;					
@@ -61,8 +61,8 @@ if (!isMoving) {
 	}
 }
 
-if (isMoving) {
-	var moveStep = openSpeed * deltaTime();
+if (isMoving && g_DeltaTime > 0.0) {
+	var moveStep = openSpeed * g_DeltaTime;
 	if (!isOpened) {		
 		var distToEnd = distanceBetweenVectors(pos, end);
 		if (distToEnd > Math.abs(moveStep)) {

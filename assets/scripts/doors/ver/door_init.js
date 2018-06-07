@@ -32,5 +32,6 @@ function startOpenDoor() {
 	moveVector = (end.sub(start)).normalize();
 	objectSetVar(doorId, "dir", moveVector.x, moveVector.y, moveVector.z);
 }
-
+/*
 delete doorId, pos;
+*/
