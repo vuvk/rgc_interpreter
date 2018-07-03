@@ -5,7 +5,7 @@ function Vector2f(x, y) {
 	switch (arguments.length)
 	{
 		case 1 : 			// create from array
-			if (x.length >= 2) {
+			if (typeof x != 'undefined' && x.length >= 2) {
 				this.x = x[0];
 				this.y = x[1];
 			}
@@ -63,7 +63,7 @@ function Vector3f(x, y, z) {
 	switch (arguments.length)
 	{
 		case 1 : 			// create from array
-			if (x.length >= 3) {
+			if (typeof x != 'undefined' && x.length >= 3) {
 				this.x = x[0];
 				this.y = x[1];
 				this.z = x[2];
@@ -93,7 +93,7 @@ function Vector3f(x, y, z) {
 	this.mul = function(value) {
 		return new Vector3f(this.x * value, 
 		                    this.y * value, 
-				    this.z * value);
+							this.z * value);
 	}
 	
 	this.div = function(value) {
@@ -117,7 +117,7 @@ function Vector3f(x, y, z) {
 	this.dot = function(vec3) {
 		return (this.x * vec3.x + 
 		        this.y * vec3.y + 
-			this.z * vec3.z);
+				this.z * vec3.z);
 	}
 	
 	this.cross = function(vec3) {
@@ -128,12 +128,16 @@ function Vector3f(x, y, z) {
 }
 
 
-function distanceBetweenVectors(vec1, vec2) {
+function distanceBetweenVectors(vec1, vec2) {	
 	if ((vec1 instanceof(Vector2f)) && (vec2 instanceof(Vector2f)))
 		return distanceBetweenPoints(vec1.x, vec1.y, vec2.x, vec2.y);
 	else
 		if ((vec1 instanceof(Vector3f)) && (vec2 instanceof(Vector3f)))
 			return distanceBetweenPoints(vec1.x, vec1.y, vec1.z, vec2.x, vec2.y, vec2.z);
-		else
+		else {
+			if (typeof(vec1) == 'undefined' || typeof(vec2) == 'undefined')
+				print('undefined value!');
+			
 			return Number.MAX_VALUE;
+		}
 }

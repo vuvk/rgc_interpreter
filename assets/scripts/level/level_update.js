@@ -1,1 +1,0 @@
-g_DeltaTime = deltaTime();
