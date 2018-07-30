@@ -55,6 +55,8 @@
 |accuracy|double|100.0|Точность стрельбы (в %)|
 |maxAmmo|double|100.0|Максимальное количество переносимых патронов|
 |infiniteAmmo|bool|false|Бесконечные ли патроны|
+|fireType|int|0|Тип выстрела: 0 - луч, 1 - видимая пуля|
+|bulletName|string|""|Имя пули для создания при fireType == 1|
 |align|uint|0|Выравнивание на экране. Значения в промежутке [0..5]. По умолчанию: 0 - down-right, 1 - down-center, 2 - down-left, 3 - up-right, 4 - up-center, 5 - up-left|
 |fireFrame|uint|0|Кадр анимации, на котором осуществляется выстрел|
 |animationSpeed|double|0.0|Скорость анимации (кадров в секунду)|
